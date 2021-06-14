@@ -32,6 +32,24 @@ def getLinkedListSize(llist):
     return i
 
 
+def reverseLinkedList(llist):
+    temp = llist
+    head = prev = ahead = None
+    while(temp is not None):
+        if(head is None):
+            head = prev = temp
+            ahead = temp = temp.next
+        else:
+            ahead = temp
+            temp = temp.next
+            ahead.next = prev
+            if(head == prev):
+                prev.next = None
+                head.next = None
+            prev = ahead
+    return prev
+
+
 def removeNode(llist, data):
     head = temp = prev = llist
     if(head.data == data):
