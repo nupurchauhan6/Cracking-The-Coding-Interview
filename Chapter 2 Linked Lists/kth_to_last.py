@@ -1,16 +1,21 @@
 from linked_list import *
 
 if __name__ == '__main__':
-    llist = createLinkedList([1, 3, 5, 6])
-    head = temp = llist
-    k = 2
+    llist = LinkedList()
+    llist.add(1)
+    llist.add(2)
+    llist.add(5)
+    llist.add(7)
+    head = temp = llist.head
+    k = 3
     i = 1
+    ans = LinkedList()
     while(temp is not None):
         if(k == i):
-            head = temp
+            ans.head = temp
             break
         i = i + 1
         temp = temp.next
     if(temp is None):
-        head = None
-    printLinkedList(head)
+        ans.head = None
+    ans.display()

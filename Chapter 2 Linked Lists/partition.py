@@ -1,26 +1,30 @@
 from linked_list import *
 
 if __name__ == '__main__':
-    llist = createLinkedList([3, 5, 8, 5, 10, 2, 1])
+    llist = LinkedList()
+    llist.add(3)
+    llist.add(5)
+    llist.add(8)
+    llist.add(10)
+    llist.add(2)
+    llist.add(1)
     partition = 5
-    temp = llist
-    less = more = pless = pmore = None
+    temp = llist.head
+    less = LinkedList()
+    more = LinkedList()
+    rear = None
     while(temp is not None):
-        tNode = Node(temp.data)
-        if(temp.data < partition):
-            if(less is None):
-                less = pless = tNode
-            else:
-                pless.next = tNode
-                pless = pless.next
-
+        data = temp.get_data()
+        if(data < partition):
+            less.add(data)
+            if(less.head is not None and rear is None):
+                rear = less.head
+            rear = rear.get_next()
         else:
-            if(more is None):
-                more = pmore = tNode
-            else:
-                pmore.next = tNode
-                pmore = pmore.next
-        temp = temp.next
-
-    pless.next = more
-    printLinkedList(less)
+            more.add(data)
+        temp = temp.get_next()
+    if(rear is not None):
+        rear.set_next(more.head)
+        less.display()
+    else:
+        more.display()

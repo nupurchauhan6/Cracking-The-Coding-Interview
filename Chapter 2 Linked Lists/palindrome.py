@@ -1,8 +1,14 @@
 from linked_list import *
 
 if __name__ == '__main__':
-    temp1 = llist = createLinkedList([7, 1, 6, 1, 7])
-    temp2 = rllist = reverseLinkedList(createLinkedList([7, 1, 6, 1, 7]))
+    llist = LinkedList()
+    llist.add(7)
+    llist.add(1)
+    llist.add(7)
+    rllist = llist
+    temp1 = llist.head
+    rllist.reverse()
+    temp2 = rllist.head
     while(temp1 is not None):
         if(temp1.data != temp2.data):
             print("Not a palindrome!")

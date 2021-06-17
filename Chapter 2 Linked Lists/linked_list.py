@@ -1,63 +1,90 @@
 class Node:
-    def __init__(self, data):
-        self.data = data
+
+    def __init__(self, init_data):
+        self.data = init_data
         self.next = None
 
+    def get_data(self):
+        return self.data
 
-def createLinkedList(llist):
-    head = prev = None
-    for ele in llist:
-        temp = Node(ele)
-        if(head == None):
-            head = prev = temp
+    def get_next(self):
+        return self.next
+
+    def set_data(self, new_data):
+        self.data = newdata
+
+    def set_next(self, new_next):
+        self.next = new_next
+
+
+class LinkedList:
+
+    def __init__(self):
+        self.head = None
+
+    def is_empty(self):
+        return self.head == None
+
+    def add(self, item):
+        temp = Node(item)
+        if(self.is_empty()):
+            self.head = temp
         else:
-            prev.next = temp
-        prev = temp
-    return head
+            current = self.head
+            while(current.get_next() is not None):
+                current = current.get_next()
+            current.set_next(temp)
 
+    def size(self):
+        current = self.head
+        count = 0
+        while current != None:
+            count = count + 1
+            current = current.get_next()
+        return count
 
-def printLinkedList(llist):
-    temp = llist
-    while(temp is not None):
-        print(temp.data)
-        temp = temp.next
+    def search(self, item):
+        current = self.head
+        found = False
+        while current != None and not found:
+            if current.get_data() == item:
+                found = True
+            else:
+                current = current.get_next()
+        return found
 
-
-def getLinkedListSize(llist):
-    temp = llist
-    i = 0
-    while(temp is not None):
-        i = i + 1
-        temp = temp.next
-    return i
-
-
-def reverseLinkedList(llist):
-    temp = llist
-    head = prev = ahead = None
-    while(temp is not None):
-        if(head is None):
-            head = prev = temp
-            ahead = temp = temp.next
+    def remove(self, item):
+        current = self.head
+        previous = None
+        found = False
+        while not found and current is not None:
+            if(current.get_data() == item):
+                found = True
+            else:
+                previous = current
+                current = current.get_next()
+        if(not found):
+            return
+        if(previous == None):
+            self.head = current.get_next()
         else:
-            ahead = temp
-            temp = temp.next
-            ahead.next = prev
-            if(head == prev):
-                prev.next = None
-                head.next = None
-            prev = ahead
-    return prev
+            previous.set_next(current.get_next())
 
+    def display(self):
+        current = self.head
+        while(current is not None):
+            print(current.get_data())
+            current = current.get_next()
 
-def removeNode(llist, data):
-    head = temp = prev = llist
-    if(head.data == data):
-        head = temp.next
-        temp = temp.next
-    while(temp is not None):
-        if(temp.data == data):
-            prev.next = temp.next
-        prev = temp
-        temp = temp.next
-    return head
+    def reverse(self):
+        first = current = self.head
+        previous = ahead = None
+        while(current is not None):
+            ahead = current
+            current = current.next
+            if previous is not None:
+                ahead.set_next(previous)
+            if(previous == first):
+                previous.set_next(None)
+                self.head.set_next(None)
+            self.head = previous = ahead
