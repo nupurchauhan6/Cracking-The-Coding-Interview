@@ -81,7 +81,7 @@ class LinkedList:
         previous = ahead = None
         while(current is not None):
             ahead = current
-            current = current.next
+            current = current.get_next()
             if previous is not None:
                 ahead.set_next(previous)
             if(previous == first):
