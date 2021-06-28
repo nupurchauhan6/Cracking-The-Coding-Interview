@@ -10,10 +10,14 @@ class Stack:
         self.items.append(item)
 
     def pop(self):
-       return self.items.pop()
+        return self.items.pop()
 
     def peek(self):
-       return self.items[len(self.items)-1]
-    
+        return self.items[len(self.items)-1]
+
     def size(self):
         return len(self.items)
+
+    def display(self):
+        while(not self.is_empty()):
+            print(self.items.pop())
